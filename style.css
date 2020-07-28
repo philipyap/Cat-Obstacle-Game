@@ -1,0 +1,20 @@
+ body{
+     background-color: peachpuff;
+ }
+ 
+ .cat{
+    
+    width: 200px;
+    height: 200px;
+    position: absolute; 
+    bottom: 0px;
+     
+ }
+
+ .obstacle{
+     width: 10px;
+     height: 10px;
+     position: absolute;
+     bottom: 70px ;
+     background-color: red;
+ } 
