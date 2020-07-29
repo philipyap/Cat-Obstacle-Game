@@ -1,20 +1,116 @@
- body{
-     background-color: peachpuff;
- }
- 
- .cat{
-    
-    width: 200px;
-    height: 200px;
+.cat{
+    width: 150px;
+    height: 149px;
     position: absolute; 
+    display: flex;
     bottom: 0px;
+    background-image: url(image/cat1.png);
+    
      
  }
 
- .obstacle{
-     width: 10px;
-     height: 10px;
+ .obstacle{         
+     width: 60px;
+     height: 60px;
      position: absolute;
-     bottom: 70px ;
-     background-color: red;
- } 
+     display: flex;
+     bottom: 10px ;
+     background-image: url(image/spikes-png.png);
+ }    
+
+ .sky {
+    display: flex;
+    position: absolute;
+    top: 30px;
+    background-image: url(image/cloud10.png);
+    /*background-repeat: repeat-x;*/
+    /*animation: slideright 1000s infinite linear; /*the speed of the image */
+    /*-webkit-animation: slideright 10000s infinite linear; /*how fast it moves*/
+    width: 300px; 
+    height: 167px;
+  }
+
+.text{
+    font-size: 20px;
+    color: lightgray;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    font-weight: bold;
+    display: flex;
+    position: absolute;
+    top: 355px;
+    left: 100px;
+}  
+
+
+#timer{
+    font-size: 25px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    color: gray;
+    font-weight: bold;
+    display: flex;
+    position: absolute;
+    top: 400px;
+    left: 100px;
+}  
+
+#sun {
+    width: 250px ;
+    height: 253px;
+    top: 50px;
+    position: absolute;
+    display: flex;
+    background-image: url(image/sun.png);
+    animation: move 30s linear infinite;
+    -webkit-animation: move 30s linear infinite ;
+    -moz-animation: move 30s linear infinite;   
+    
+}
+
+#flower{
+    display: flex;
+    position: absolute;
+    bottom: 30px;
+    background-image: url(image/flower2.png);
+    background-repeat: repeat-x;
+    width: 1500%; 
+    height: 300px;
+}
+
+#background{
+    display: flex;
+    position: absolute;
+    bottom: -30px;
+    background-image: url(image/background.png);
+    background-repeat: repeat-x;
+    width: 200%; 
+    height: 200px;
+  }
+
+  #reset{
+      border-radius: 10px;
+      margin: 100px 200px 0 500px ;
+      font-size: 30px;
+      display: flex;
+      
+  }
+
+  @keyframes move {
+   
+    100%{
+         -webkit-transform: rotate(360deg);
+    }
+  }
+  
+  @-webkit-keyframes move {
+     
+     100%{
+        -webkit-transform: rotate(360deg);
+    }
+  } 
+   
+  @-moz-keyframes move{
+      100%{
+        -webkit-transform: rotate(360deg);
+      }
+  }
+  
