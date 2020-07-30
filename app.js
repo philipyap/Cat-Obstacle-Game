@@ -4,6 +4,7 @@ document.addEventListener('DOMContentLoaded', () =>{
     const text = document.querySelector('.text')
     const reset = document.querySelector('#reset')
     const timer = document.querySelector('#timer')
+    let jumpSound = document.getElementById('sound');
     reset.style.opacity= 0;
     text.style.opacity= 1;
     let jumping = false
@@ -12,7 +13,7 @@ document.addEventListener('DOMContentLoaded', () =>{
     let position = 0;// the position space that cat moving upward   
     let timerId = setInterval(countTimer, 1000) //  called by setInterval function every second
     let totalSeconds = 0;
-    let jumpSound = document.getElementById('sound');
+    
 
     //reset button
     reset.addEventListener('click', function(){
@@ -71,7 +72,7 @@ document.addEventListener('DOMContentLoaded', () =>{
                     count --
                     position = position * gravity; //*0.9
                     cat.style.bottom = position + 'px';
-                }, 7)// the speed when it drops down
+                }, 10)// the speed when it drops down
             }      
             //move up
             //console.log('up')
@@ -79,7 +80,7 @@ document.addEventListener('DOMContentLoaded', () =>{
             count ++
             position = position * gravity;//*0.9
             cat.style.bottom = position + 'px'; 
-        }, 5) //the speed when it jumps 
+        }, 1) //the speed when it jumps 
     }
     
     //cloud
@@ -113,7 +114,7 @@ document.addEventListener('DOMContentLoaded', () =>{
 
         //set the spikes running speed and gameover 
         let timerId = setInterval(function(){
-            if (spikePosition > 0 && spikePosition < 90 && position < 90)  { // spikes and cat position
+            if (spikePosition > 0 && spikePosition < 80 && position < 80)  { // spikes and cat position
                 clearInterval(timerId);
                 gameOver = true; 
                 reset.style.opacity= 1;
