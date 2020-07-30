@@ -80,7 +80,7 @@ document.addEventListener('DOMContentLoaded', () =>{
             count ++
             position = position * gravity;//*0.9
             cat.style.bottom = position + 'px'; 
-        }, 1) //the speed when it jumps 
+        }, 5) //the speed when it jumps 
     }
     
     //cloud
@@ -105,7 +105,7 @@ document.addEventListener('DOMContentLoaded', () =>{
     
     //spikes and gameover 
     function allSpikes (){
-        let randomTime = Math.random() * 4000 // * 4 second that obstacles come out 
+        let randomTime = Math.random() * 5000 // * 5 second that obstacles come out 
         let spikePosition = 1500; // come from page
         const spike = document.createElement('div')
         if (!gameOver) spike.classList.add('spike')
@@ -114,7 +114,7 @@ document.addEventListener('DOMContentLoaded', () =>{
 
         //set the spikes running speed and gameover 
         let timerId = setInterval(function(){
-            if (spikePosition > 0 && spikePosition < 80 && position < 80)  { // spikes and cat position
+            if (spikePosition > 0 && spikePosition < 50 && position < 70)  { // spikes and cat position
                 clearInterval(timerId);
                 gameOver = true; 
                 reset.style.opacity= 1;
@@ -125,7 +125,7 @@ document.addEventListener('DOMContentLoaded', () =>{
             spikePosition = spikePosition - 15; // speed of the obstacles
             spike.style.left = spikePosition + 'px';  
             } 
-        }, 30)
+        }, 35)
           if (!gameOver)setTimeout(allSpikes, randomTime)//obstacles come out in random time
     }
     allSpikes()   
