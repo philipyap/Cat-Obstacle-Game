@@ -9,8 +9,7 @@ document.addEventListener('DOMContentLoaded', () =>{
     let jumping = false
     let gravity = 0.9
     let gameOver = false
-    let position = 0;// the position space that cat moving upward
-    
+    let position = 0;// the position space that cat moving upward   
     let timerId = setInterval(countTimer, 1000) //  called by setInterval function every second
     let totalSeconds = 0;
 
@@ -20,17 +19,15 @@ document.addEventListener('DOMContentLoaded', () =>{
             let hour = Math.floor(totalSeconds / 3600) // count hour
             let minute = Math.floor((totalSeconds- hour * 3600) / 60); //count minute: substruct hours secounds from total seconds
             let seconds = totalSeconds-(hour*3600 + minute*60); // count seconds: substruct hours and minutes seconds from total seconds
-            timer.innerHTML = hour + ":" + minute + ":" + seconds; //add the result in a div called 'timer'          
+            timer.innerHTML = "TIMER: " + hour + ":" + minute + ":" + seconds; //add the result in a div called 'timer'          
         }
         else{
             clearInterval(timerId);
         } 
     }
     countTimer()
-
     
-    function pressed(e){
-        
+    function pressed(e){      
         if(e.keyCode === 32) {
             if (!jumping){
                 jumping = true;
@@ -47,99 +44,81 @@ document.addEventListener('DOMContentLoaded', () =>{
     
     document.addEventListener('keyup', pressed) // keyup= when the key is released on the keyboard
 
-    function jump() {
-     
+    function jump() {    
         let count = 0
         let timerId = setInterval(function(){
-        //move down 
-
-            if (count === 20){ //how long it takes to the jump
+            //move down 
+            if (count === 30){ //the count between the jump
                 clearInterval(timerId)
                 //to stop the up fuctionality
-            // console.log('down')
-
+                // console.log('down')
                 let downTimerId = setInterval(function (){
                     if (count === 0){
                         clearInterval(downTimerId)
                         // stop the item sink down
                         jumping = false; // only jump when its on the ground
                     }
-                    position = position - 5;
+                    position = position - 2; // how low it drops
                     count --
                     position = position * gravity; 
-                    
                     cat.style.bottom = position + 'px';
-                }, 15)
+                }, 10)// the speed when it drops down
             }      
             //move up
             //console.log('up')
             position = position + 50; //how high it jumps
             count ++
             position = position * gravity;
-            cat.style.bottom = position + 'px';
-        }, 10) //the speed of the cat 
-
+            cat.style.bottom = position + 'px'; 
+        }, 10) //the speed when it jumps 
     }
     
     function allClouds (){
-        let randomTime = Math.random() * 6000 // * 5 second that obstacles come out 
+        let randomTime = Math.random() * 6000 // * 6 second that cloud come out 
         let skyPosition = 1500; // come from page
-        const sky = document.createElement('div')
+        const sky = document.createElement('div') 
         if(!gameOver)sky.classList.add('sky')
         grid.appendChild(sky)
-        sky.style.left = skyPosition + 'px';
-        
-            
+        sky.style.left = skyPosition + 'px';  
         let timerId = setInterval(function(){
             if(gameOver){
                 clearInterval(timerId)
             }        
             else{
-                
-                skyPosition = skyPosition - 5;
+                skyPosition = skyPosition - 3; // speed of the cloud
                 sky.style.left = skyPosition + 'px';
             }
-        }, 40)//set the cloud running
-            if(!gameOver)setTimeout(allClouds, randomTime)
-            
-        
-} allClouds()  
+        }, 30)//set the multiple clouds running speed
+            if(!gameOver)setTimeout(allClouds, randomTime)       
+    } allClouds()  
     
-
     function allObstacles (){
-        //reset.style.opacity= 0;
-        //cat.style.opacity=1;
-        let randomTime = Math.random() * 6000 // * 6 second that obstacles come out 
+        let randomTime = Math.random() * 4000 // * 7 second that obstacles come out 
         let obstaclePosition = 1500; // come from page
         const obstacle = document.createElement('div')
         if (!gameOver) obstacle.classList.add('obstacle')
         grid.appendChild(obstacle)
         obstacle.style.left = obstaclePosition + 'px';
 
-
         //set the obstacle running
         let timerId = setInterval(function(){
-            if (obstaclePosition > 0 && obstaclePosition < 60 && position < 60)  {
+            if (obstaclePosition > 0 && obstaclePosition < 100 && position < 100)  {
                 clearInterval(timerId);
                 gameOver = true; 
-                reset.style.opacity= 1;
-                //cat.style.opacity=1;
-                //obstacle.style.opacity=0;       
+                reset.style.opacity= 1;       
                 while (grid.firstChild) { // remove all the grid children
                 grid.removeChild(grid.lastChild)}
-                //document.querySelectorAll('.obstacle')
             }
-            else{
-            
-            obstaclePosition = obstaclePosition - 1; //speed of obstacle
+            else{           
+            obstaclePosition = obstaclePosition - 15; // speed of the obstacles
             obstacle.style.left = obstaclePosition + 'px';  
             } 
-        }, 10)
+        }, 30)
           if (!gameOver)setTimeout(allObstacles, randomTime)//obstacles come out in random time
     }
     allObstacles()
 
-        reset.addEventListener('click', function(){
+    reset.addEventListener('click', function(){
         location.reload()
     })
 })

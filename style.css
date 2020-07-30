@@ -37,9 +37,29 @@
     font-weight: bold;
     display: flex;
     position: absolute;
-    top: 355px;
-    left: 100px;
+    top: 330px;
+    left: 300px;
 }  
+
+#tree{
+    width: 500px;
+    height: 559px;
+    position: absolute;
+    display: flex;
+    left: -100px;
+    bottom: 10px;
+    background-image: url(image/cherry\ blossom.png);
+}
+
+#house{
+    width: 800px;
+    height: 350px;
+    position: absolute;
+    display: flex;
+    bottom: 60px;
+    right: -15px;
+    background-image: url(image/house.png);
+}
 
 
 #timer{
@@ -49,14 +69,15 @@
     font-weight: bold;
     display: flex;
     position: absolute;
-    top: 400px;
-    left: 100px;
+    top: 350px;
+    left: 300px;
 }  
 
 #sun {
     width: 250px ;
     height: 253px;
     top: 50px;
+    left: 200px;
     position: absolute;
     display: flex;
     background-image: url(image/sun.png);
