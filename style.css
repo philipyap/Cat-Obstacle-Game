@@ -9,7 +9,7 @@
      
  }
 
- .obstacle{         
+ .spike{         
      width: 60px;
      height: 60px;
      position: absolute;
@@ -23,9 +23,6 @@
     position: absolute;
     top: 30px;
     background-image: url(image/cloud10.png);
-    /*background-repeat: repeat-x;*/
-    /*animation: slideright 1000s infinite linear; /*the speed of the image */
-    /*-webkit-animation: slideright 10000s infinite linear; /*how fast it moves*/
     width: 300px; 
     height: 167px;
   }
@@ -37,8 +34,26 @@
     font-weight: bold;
     display: flex;
     position: absolute;
-    top: 330px;
-    left: 300px;
+    top: 180px;
+    left: 400px;
+} 
+
+#reset{
+    border-radius: 10px;
+    margin: 100px 200px 0 500px ;
+    font-size: 30px;
+    display: flex;   
+}
+
+#timer{
+    font-size: 25px;
+    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
+    color: gray;
+    font-weight: bold;
+    display: flex;
+    position: absolute;
+    top: 200px;
+    left: 400px;
 }  
 
 #tree{
@@ -52,32 +67,20 @@
 }
 
 #house{
-    width: 800px;
-    height: 350px;
+    width: 600px;
+    height: 266px;
     position: absolute;
     display: flex;
-    bottom: 60px;
+    bottom: 30px;
     right: -15px;
     background-image: url(image/house.png);
 }
-
-
-#timer{
-    font-size: 25px;
-    font-family: Cambria, Cochin, Georgia, Times, 'Times New Roman', serif;
-    color: gray;
-    font-weight: bold;
-    display: flex;
-    position: absolute;
-    top: 350px;
-    left: 300px;
-}  
 
 #sun {
     width: 250px ;
     height: 253px;
     top: 50px;
-    left: 200px;
+    right: 100px;
     position: absolute;
     display: flex;
     background-image: url(image/sun.png);
@@ -90,29 +93,25 @@
 #flower{
     display: flex;
     position: absolute;
-    bottom: 30px;
+    bottom: 20px;
     background-image: url(image/flower2.png);
     background-repeat: repeat-x;
-    width: 1500%; 
-    height: 300px;
+    width: 200%; 
+    height: 90px;
+    animation: slideright 2000s infinite linear;
+    -webkit-animation: slideright 2000s infinite linear;
 }
 
-#background{
+#grass{
     display: flex;
     position: absolute;
-    bottom: -30px;
+    bottom: 10px;
     background-image: url(image/background.png);
     background-repeat: repeat-x;
     width: 200%; 
-    height: 200px;
-  }
-
-  #reset{
-      border-radius: 10px;
-      margin: 100px 200px 0 500px ;
-      font-size: 30px;
-      display: flex;
-      
+    height: 92px;
+    animation: slideright 2000s infinite linear;
+    -webkit-animation: slideright 2000s infinite linear;
   }
 
   @keyframes move {
@@ -135,3 +134,20 @@
       }
   }
   
+  @keyframes slideright {
+    from {
+        background-position: 10000%;
+    }
+    to {
+        background-position: 0%;
+    }
+  }
+  
+  @-webkit-keyframes slideright {
+    from {
+        background-position: 10000%;
+    }
+    to {
+        background-position: 0%;
+    }
+  }

@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () =>{
-    const cat= document.querySelector('.cat')
+    const cat = document.querySelector('.cat')
     const grid = document.querySelector('.grid')
     const text = document.querySelector('.text')
     const reset = document.querySelector('#reset')
@@ -12,7 +12,14 @@ document.addEventListener('DOMContentLoaded', () =>{
     let position = 0;// the position space that cat moving upward   
     let timerId = setInterval(countTimer, 1000) //  called by setInterval function every second
     let totalSeconds = 0;
+    let jumpSound = document.getElementById('sound');
 
+    //reset button
+    reset.addEventListener('click', function(){
+        location.reload()
+    })
+
+    //count up timer
     function countTimer(){
         if(!gameOver){
             ++totalSeconds;
@@ -27,30 +34,32 @@ document.addEventListener('DOMContentLoaded', () =>{
     }
     countTimer()
     
-    function pressed(e){      
+    //space keycode
+    function pressed(e){  
+       
         if(e.keyCode === 32) {
             if (!jumping){
                 jumping = true;
                 jump(); // execute jump if its true
             }   
         }
-        if(jumping = true){
+        if(jumping = true){ // the text gets invisible only when player press space key
             text.style.opacity = 0;
+            jumpSound.play();
         }
         else{
             text.style.opacity = 1;
         }
-    }
-    
+    }   
     document.addEventListener('keyup', pressed) // keyup= when the key is released on the keyboard
 
+    // cat jump
     function jump() {    
         let count = 0
         let timerId = setInterval(function(){
             //move down 
-            if (count === 30){ //the count between the jump
-                clearInterval(timerId)
-                //to stop the up fuctionality
+            if (count === 40){ //the count between the jump
+                clearInterval(timerId)//to stop the up fuctionality
                 // console.log('down')
                 let downTimerId = setInterval(function (){
                     if (count === 0){
@@ -58,24 +67,25 @@ document.addEventListener('DOMContentLoaded', () =>{
                         // stop the item sink down
                         jumping = false; // only jump when its on the ground
                     }
-                    position = position - 2; // how low it drops
+                    position = position - 0.5; // how low it drops
                     count --
-                    position = position * gravity; 
+                    position = position * gravity; //*0.9
                     cat.style.bottom = position + 'px';
-                }, 10)// the speed when it drops down
+                }, 7)// the speed when it drops down
             }      
             //move up
             //console.log('up')
             position = position + 50; //how high it jumps
             count ++
-            position = position * gravity;
+            position = position * gravity;//*0.9
             cat.style.bottom = position + 'px'; 
-        }, 10) //the speed when it jumps 
+        }, 5) //the speed when it jumps 
     }
     
+    //cloud
     function allClouds (){
-        let randomTime = Math.random() * 6000 // * 6 second that cloud come out 
-        let skyPosition = 1500; // come from page
+        let randomTime = Math.random() * 4000 // * 4 second that cloud come out 
+        let skyPosition = 1500; // where the clouds come in from page
         const sky = document.createElement('div') 
         if(!gameOver)sky.classList.add('sky')
         grid.appendChild(sky)
@@ -88,39 +98,36 @@ document.addEventListener('DOMContentLoaded', () =>{
                 skyPosition = skyPosition - 3; // speed of the cloud
                 sky.style.left = skyPosition + 'px';
             }
-        }, 30)//set the multiple clouds running speed
+        }, 15)//set the multiple clouds running speed
             if(!gameOver)setTimeout(allClouds, randomTime)       
     } allClouds()  
     
-    function allObstacles (){
-        let randomTime = Math.random() * 4000 // * 7 second that obstacles come out 
-        let obstaclePosition = 1500; // come from page
-        const obstacle = document.createElement('div')
-        if (!gameOver) obstacle.classList.add('obstacle')
-        grid.appendChild(obstacle)
-        obstacle.style.left = obstaclePosition + 'px';
+    //spikes and gameover 
+    function allSpikes (){
+        let randomTime = Math.random() * 4000 // * 4 second that obstacles come out 
+        let spikePosition = 1500; // come from page
+        const spike = document.createElement('div')
+        if (!gameOver) spike.classList.add('spike')
+        grid.appendChild(spike)
+        spike.style.left = spikePosition + 'px';
 
-        //set the obstacle running
+        //set the spikes running speed and gameover 
         let timerId = setInterval(function(){
-            if (obstaclePosition > 0 && obstaclePosition < 100 && position < 100)  {
+            if (spikePosition > 0 && spikePosition < 90 && position < 90)  { // spikes and cat position
                 clearInterval(timerId);
                 gameOver = true; 
-                reset.style.opacity= 1;       
-                while (grid.firstChild) { // remove all the grid children
+                reset.style.opacity= 1;
+                while (grid.firstChild) { // remove all the grid children: the player cat and spikes
                 grid.removeChild(grid.lastChild)}
             }
             else{           
-            obstaclePosition = obstaclePosition - 15; // speed of the obstacles
-            obstacle.style.left = obstaclePosition + 'px';  
+            spikePosition = spikePosition - 15; // speed of the obstacles
+            spike.style.left = spikePosition + 'px';  
             } 
         }, 30)
-          if (!gameOver)setTimeout(allObstacles, randomTime)//obstacles come out in random time
+          if (!gameOver)setTimeout(allSpikes, randomTime)//obstacles come out in random time
     }
-    allObstacles()
-
-    reset.addEventListener('click', function(){
-        location.reload()
-    })
+    allSpikes()   
 })
 
 
