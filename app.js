@@ -14,8 +14,6 @@ document.addEventListener('DOMContentLoaded', () =>{
     let timerId = setInterval(countTimer, 1000) //  called by setInterval function every second
     let totalSeconds = 0;
     
-
-    //reset button
     reset.addEventListener('click', function(){
         location.reload()
     })
@@ -36,17 +34,16 @@ document.addEventListener('DOMContentLoaded', () =>{
     countTimer()
     
     //space keycode
-    function pressed(e){  
-       
-        if(e.keyCode === 32) {
+    function pressed(e){   
+        if(e.keyCode === 32) { //space key
             if (!jumping){
                 jumping = true;
                 jump(); // execute jump if its true
             }   
         }
-        if(jumping = true){ // the text gets invisible only when player press space key
-            text.style.opacity = 0;
-            jumpSound.play();
+        if(jumping = true && !gameOver){ 
+            text.style.opacity = 0; //"press space key t0 jump" text will be gone
+            jumpSound.play(); // sound FX play when game starts
         }
         else{
             text.style.opacity = 1;
@@ -54,18 +51,17 @@ document.addEventListener('DOMContentLoaded', () =>{
     }   
     document.addEventListener('keyup', pressed) // keyup= when the key is released on the keyboard
 
-    // cat jump
+    // function for the cat : set height count, the gravity, and speed when it goes up and down.
     function jump() {    
         let count = 0
         let timerId = setInterval(function(){
             //move down 
-            if (count === 40){ //the count between the jump
-                clearInterval(timerId)//to stop the up fuctionality
+            if (count === 40){ //the height counts between the jump
+                clearInterval(timerId)// stop jumping up
                 // console.log('down')
                 let downTimerId = setInterval(function (){
                     if (count === 0){
-                        clearInterval(downTimerId)
-                        // stop the item sink down
+                        clearInterval(downTimerId)// stop the item sink down
                         jumping = false; // only jump when its on the ground
                     }
                     position = position - 0.5; // how low it drops
@@ -83,7 +79,7 @@ document.addEventListener('DOMContentLoaded', () =>{
         }, 5) //the speed when it jumps 
     }
     
-    //cloud
+    //cloud function :
     function allClouds (){
         let randomTime = Math.random() * 4000 // * 4 second that cloud come out 
         let skyPosition = 1500; // where the clouds come in from page
@@ -112,12 +108,15 @@ document.addEventListener('DOMContentLoaded', () =>{
         grid.appendChild(spike)
         spike.style.left = spikePosition + 'px';
 
-        //set the spikes running speed and gameover 
+        // gameover function
         let timerId = setInterval(function(){
-            if (spikePosition > 0 && spikePosition < 50 && position < 70)  { // spikes and cat position
+            if (spikePosition > 0 && spikePosition < 90 && position < 90)  { // spikes and cat position
                 clearInterval(timerId);
-                gameOver = true; 
-                reset.style.opacity= 1;
+                gameOver = true;       
+                reset.style.opacity= 1; // shows reset button
+                sun.style.animation = 'pause'; // sun animation stop
+                grass.style.animation = 'pause'; // grass animation stop
+                flower.style.animation = 'pause'; //flower animation stop
                 while (grid.firstChild) { // remove all the grid children: the player cat and spikes
                 grid.removeChild(grid.lastChild)}
             }
@@ -129,6 +128,7 @@ document.addEventListener('DOMContentLoaded', () =>{
           if (!gameOver)setTimeout(allSpikes, randomTime)//obstacles come out in random time
     }
     allSpikes()   
+ 
 })
 
 

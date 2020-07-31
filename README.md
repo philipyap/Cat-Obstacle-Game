@@ -251,7 +251,7 @@ HTML=
 JS=
 let jumpSound = document.getElementById('sound');
 
-if(jumping = true){ // the text gets invisible only when player press space key
+if(jumping = true && !gamOver){ // the text gets invisible only when player press space key
             jumpSound.play(); // HERE
         }
 ```
@@ -277,7 +277,7 @@ const text = document.querySelector('.text')
 
 text.style.opacity= 1;
 
-if(jumping = true){ // the text gets invisible only when player press space key
+if(jumping = true && !gameOver){ // the text gets invisible only when player press space key
             text.style.opacity = 0;
             jumpSound.play();
         }
