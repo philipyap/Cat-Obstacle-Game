@@ -14,11 +14,12 @@ document.addEventListener('DOMContentLoaded', () =>{
     let timerId = setInterval(countTimer, 1000) //  called by setInterval function every second
     let totalSeconds = 0;
     
+    //reset button
     reset.addEventListener('click', function(){
         location.reload()
     })
 
-    //count up timer
+    //show count up timer when the game starts
     function countTimer(){
         if(!gameOver){
             ++totalSeconds;
@@ -76,10 +77,10 @@ document.addEventListener('DOMContentLoaded', () =>{
             count ++
             position = position * gravity;//*0.9
             cat.style.bottom = position + 'px'; 
-        }, 5) //the speed when it jumps 
+        }, 3) //the speed when it jumps 
     }
     
-    //cloud function :
+    //cloud function : set position, time and, speed
     function allClouds (){
         let randomTime = Math.random() * 4000 // * 4 second that cloud come out 
         let skyPosition = 1500; // where the clouds come in from page
@@ -99,18 +100,18 @@ document.addEventListener('DOMContentLoaded', () =>{
             if(!gameOver)setTimeout(allClouds, randomTime)       
     } allClouds()  
     
-    //spikes and gameover 
+    //spikes function 
     function allSpikes (){
-        let randomTime = Math.random() * 5000 // * 5 second that obstacles come out 
+        let randomTime = Math.random() * 6000 // * 6 second that obstacles come out 
         let spikePosition = 1500; // come from page
         const spike = document.createElement('div')
         if (!gameOver) spike.classList.add('spike')
         grid.appendChild(spike)
         spike.style.left = spikePosition + 'px';
 
-        // gameover function
+        // gameover part
         let timerId = setInterval(function(){
-            if (spikePosition > 0 && spikePosition < 90 && position < 90)  { // spikes and cat position
+            if (spikePosition > 0 && spikePosition < 60 && position < 60)  { // spikes and cat position
                 clearInterval(timerId);
                 gameOver = true;       
                 reset.style.opacity= 1; // shows reset button
@@ -121,7 +122,7 @@ document.addEventListener('DOMContentLoaded', () =>{
                 grid.removeChild(grid.lastChild)}
             }
             else{           
-            spikePosition = spikePosition - 15; // speed of the obstacles
+            spikePosition = spikePosition - 12; // speed of the obstacles
             spike.style.left = spikePosition + 'px';  
             } 
         }, 35)
